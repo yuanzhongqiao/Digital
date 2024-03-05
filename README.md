@@ -1,267 +1,135 @@
-[![Download](distribution/Download.svg)](https://github.com/hneemann/Digital/releases/latest/download/Digital.zip)
-
-![Build Status](https://travis-ci.com/hneemann/Digital.svg?branch=master)
-[![codecov](https://codecov.io/gh/hneemann/Digital/branch/master/graph/badge.svg)](https://codecov.io/gh/hneemann/Digital)
-
-# Digital #
-
-Digital is an easy-to-use digital logic designer and circuit simulator designed for educational purposes.
-
-![screnshot](distribution/screenshot.png)
-
-![screnshot2](distribution/screenshot2.png)
-
-## [Download](https://github.com/hneemann/Digital/releases/latest/download/Digital.zip) and Installation ##
-
-There is no installation required, just unpack the *Digital.zip* file, which is available
-for [download](https://github.com/hneemann/Digital/releases/latest/download/Digital.zip). On Linux start the shell
-script and on Windows and MacOS the JAR file can be started directly. A Java Runtime Environment (at least JRE 8) is
-required to run Digital. On Windows the easiest way to get Java is to install the binaries provided by the
-[Eclipse Temurin](https://adoptium.net/) project.
-
-If there are any problems starting Digital on your system, please try to run Digital from a command line within the
-*Digital* folder:
-
-```
-java -jar Digital.jar
-```
-
-## Features ##
-
-These are the main features of Digital:
-
-- Visualization of signal states with measurement graphs.
-- Single gate mode to analyze oscillations.
-- Analysis and synthesis of combinatorial and sequential circuits.
-- Simple testing of circuits: You can create test cases and execute them to verify your design.
-- Many examples: From a transmission gate D-flip-flop to a complete (simple) MIPS-like single cycle CPU.
-- Includes a simple editor for finite state machines (FSM). A FSM can then be converted to a state transition table and a circuit implementing the FSM (See [screenshot](#additional-screenshots)).
-- Contains a library with the most commonly used 74xx series integrated circuits.
-- Supports generic circuits. This allows the creation of circuits that can be parameterized when used. In this way, it is possible, for e.g., to create a barrel shifter with a selectable bit width.
-- Good performance: The example processor can be clocked at 120 kHz.
-- Supports large circuits: The "Conway's Game of Life" example consists of about 2400 active components and works just fine.
-- It is possible to use custom components which are implemented in Java and packed in a jar file. See this [example](https://github.com/hneemann/digitalCustomComponents) for details.   
-- Simple remote [TCP interface](https://github.com/hneemann/Assembler/blob/master/src/main/java/de/neemann/assembler/gui/RemoteInterface.java)
-  which e.g. allows an [assembler IDE](https://github.com/hneemann/Assembler) to control the simulator.
-- Components can be described using VHDL or Verilog. The open source VHDL simulator [ghdl](http://ghdl.free.fr/)
-  needs to be installed to simulate a VHDL defined component, and the open source Verilog simulator
-  [Icarus Verilog](http://iverilog.icarus.com/) is required to simulate a Verilog defined component.
-- A circuit can be exported to VHDL or Verilog. There is also direct support for the
-  [BASYS3 Board](https://reference.digilentinc.com/reference/programmable-logic/basys-3/start) and the
-  [TinyFPGA BX](https://tinyfpga.com/) board. See the documentation for details. The examples folder contains a variant of the example CPU, which runs on a BASYS3 board.
-- Direct export of JEDEC files which you can flash to a [GAL16v8](https://www.microchip.com/wwwproducts/en/ATF16V8C)
-  or a [GAL22v10](https://www.microchip.com/wwwproducts/en/ATF22V10C). These chips are somewhat outdated (introduced in 1985!)
-  but sufficient for beginners exercises, easy to understand and well documented. Also the
-  [ATF150x](https://www.microchip.com/design-centers/programmable-logic/spld-cpld/cpld-atf15xx-family) chips are
-  supported which offer up to 128 macro-cells and in system programming. See the [documentation](https://github.com/hneemann/Digital/releases/latest) for details.
-- SVG export of circuits, including a LaTeX/Inkscape compatible SVG version (see
-  [ctan](https://www.ctan.org/tex-archive/info/svg-inkscape))
-- No legacy code.
-- Good test coverage (about 80%; Neither the GUI tests nor the HDL simulator integration tests are running on the
-  Travis-CI build servers, so CodeCov measures only about 50%). Almost all examples contain test cases which ensure that they work correctly.
-
-The latest changes that have not yet been released are listed in the
-[release notes](distribution/ReleaseNotes.txt).
-You can find the latest pre-release builds [here](https://infdigital.dhbw-mosbach.de/). 
-In the pre release builds the automated GUI tests are usually not executed. 
-All other tests, including the HDL tests, were executed without errors.
-
-## Documentation ##
-
-The [documentation](https://github.com/hneemann/Digital/releases/latest) is available in English, German, Spanish,
-Portuguese, French, Italian and simplified Chinese. It is still very incomplete but it contains a chapter "First Steps"
-which explains the basic usage of Digital. The documentation also contains a list of available 74xx chips and a list of
-available keyboard shortcuts.
-
-## Translations ##
-
-So far Digital is available in English, German, Spanish, Portuguese, French, Italian and simplified Chinese. If someone
-wants to add a new translation, please let me [know](mailto:digital-simulator@web.de). I can provide you with a special
-file for translation. This file is much easier to translate than
-the [files](https://github.com/hneemann/Digital/blob/master/src/main/resources/lang)
-used directly by Digital. So you don't have to deal with GitHub or the Java source code. Simply add the respective
-translation of the English text to this file and send it back to [me](mailto:digital-simulator@web.de). If you want to
-know how to create the necessary files yourself, see
-[here](https://github.com/hneemann/Digital/blob/master/src/main/resources/lang/howTo.md).
-
-## Comments ##
-
-If you want to send a bug report or feature request please use the GitHub
-[issue tracker](https://github.com/hneemann/Digital/issues/new). This helps me to improve Digital, so do not hesitate.
-If you have general questions, you can also use the new
-GitHub [Discussions](https://github.com/hneemann/Digital/discussions)
-to ask your questions without creating an issue.
-
-It's also possible to send a private message to [digital-simulator@web.de](mailto:digital-simulator@web.de).
-
-## Motivation ##
-
-Prior to the development of Digital, I used [Logisim](http://www.cburch.com/logisim/), developed by Carl Burch.
-If you are familiar with Logisim you will recognize the wire color scheme.
-
-Logisim is a excellent and proven tool for teaching purposes, that has been actively developed until 2011. 
-In 2013 Carl Burch has started the development of a new simulator called [Toves](http://www.toves.org/). 
-In his [blog](http://www.toves.org/blog/) he explained why he decided to develop a new simulator instead of improving Logisim. 
-In short: In his opinion, there are weaknesses in Logisim's architecture that are too difficult to overcome. 
-Unfortunately, the development of Toves was discontinued at a very early stage.
-
-In 2014, Carl Burch finally [discontinued](http://www.cburch.com/logisim/retire-note.html) the development of
-Logisim. Since Logisim was released as open source, there are a number of forks to continue the work on Logisim:
-
-- [Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution) by people of a group of swiss institutes
-  (Haute École Spécialisée Bernoise, Haute École du paysage, d'ingénierie et d'architecture de Genève, and Haute École d'Ingénierie et de Gestion du Canton de Vaud)
-- [Logisim](https://github.com/lawrancej/logisim) by Joseph Lawrance at Wentworth Institute of Technology, Boston, MA 
-- [Logisim-iitd](https://code.google.com/archive/p/logisim-iitd/) from the Indian Institute of Technology Delhi
-- [Logisim](http://www.cs.cornell.edu/courses/cs3410/2015sp/) from the CS3410 course of the Cornell University
-
-But as far as I know, these projects do not work on solving the architectural difficulties. 
-They are more about adding features and fixing bugs. In [Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution), 
-for example, a VHDL/Verilog export and a really nice FPGA board integration was added.
-
-So I also decided to implement a new simulator completely from scratch and started the implementation of Digital in March 2016.
-In the meantime a development level has been reached which is comparable to Logisim.
-In some areas (performance, testing of circuits, circuit analysis, hardware support) Logisim has already been exceeded.
-
-Below I would like to explain briefly the reasons which led me to start a new development:
-
-### Switch On ###
-
-In Logisim there is no real "switching on" of a circuit. The simulation is running also while you are modifying it. 
-This causes sometimes an unexpected behaviour. So it is possible to build a simple master-slave flip-flop
-which works fine. But after a circuit reset the flip-flop does not work anymore.
-Since the circuit is not switched on, there is no
-settling time to bring the circuit to a stable condition after its completion.
-A master-slave JK-flip-flop can only be implemented with a reset input, and this
-reset input needs to be activated to make the circuit operational.
-
-To understand how Digital deals with this issue, you have to look at how the simulation works in Digital:
-Digital uses an event based simulator approach, i.e. each time a 
-gate undergoes a change at one of its inputs, the new input states are read, however, 
-the outputs of the gate are not updated instantly. Only when all gates involved have read their inputs, 
-the outputs of all gates are updated. All gates seem to change synchronously, i.e.
-they seem to have all the exact same gate delay time.
-However, an undesirable feature of this approach is that even a simple RS flip-flop might not be able to 
-reach a stable state. The same problem Logisim has.
-
-To solve that problem, the "switching on" is introduced and a different simulation mode is used during the
-settling time right after switching on the circuit:
-Each time a gate undergoes a change at one of its inputs all gate inputs are read and their outputs are updated immediately.
-This happens gatewise in random order until no further changes occur and the circuit reaches a stable state.
-The gates appear to have random delay times now.
-This way, a master-slave flip-flop reaches a stable state after "switch on", however, the final state is still undefined.
-
-To start a circuit in a defined state a special reset gate is used.
-This gate has a single output which is low during settling time and goes 
-high when settling time is over.
-
-A disadvantage of this approach is the fact that a running simulation cannot be changed.
-In order to do so, the circuit needs be switched off, modified and switched on again.
-However, this procedure is also advisable for real circuits.
-
-### Oscillations ###
-
-With Logisim it is hard to find the root cause for oscillating circuits. If Logisim detects an oscillation,
-a corresponding message is issued, but it is not possible to investigate the cause in more detail, so it is difficult to
-understand what happens.
-
-The synchronous update of all gates, which have seen a change at one of their inputs may also cause
-oscillations in Digital. In such a case, the oscillation is detected and simulation stops.
-However, there is also a single gate mode which allows to propagate a signal change gate by gate. This feature allows to
-follow the way through the circuit. After each step, all gates with a change at one
-of their inputs are highlighted.
-This way you can see how a signal change propagates in a circuit, thus you are able to find the root cause of an oscillation.
-
-### Embedded circuits ###
-
-Similar to Logisim, Digital also allows to embed previously saved circuits in new designs, so hierarchical
-circuits can be created. However, in Digital embedded circuits are included as often as 
-the circuit is used. This is similar to a C program in which all 
-function calls are compiled as inlined functions. And this is also similar to a real circuit: 
-Each sub circuit is "physically present" as often as it is used in the design. 
-Although this approach increases the size of the data structure of the simulation model in memory, 
-it simplifies the simulation itself.
-Thus, for example, the inputs and outputs of an embedded circuit are not specifically treat, they simply don't 
-exist anymore after the formation of the simulation model. Even bidirectional connections can be implemented easily.
-Because of that approach for instance a embedded AND gate in a sub circuit behaves exactly like an AND gate 
-inserted at top level although there is actually no difference between these two variants from the 
-simulation models perspective.
-Logisim works somewhat different, which sometimes leads to surprises like unexpected signal propagation times and
-which makes it difficult to use bidirectional pins.
-
-### Performance ###
-
-If a complete processor is simulated, it is possible to calculate the simulation without an update of the 
-graphical representation.
-A simple processor (see example) can be simulated with a 120kHz clock (Intel® Core ™ i5-3230M CPU @ 2.60GHz), which is
-suitable also for more complex assembly exercises like Conway's Game of Life. There is a break gate having a single
-input. If this input changes from low to high this quick run is stopped.
-This way, an assembler instruction BRK can be implemented, which then can be used to insert break points
-in assembly language programs. So the debugging of assembly programs becomes very simple.
-
-### Debugging ###
-
-In Logisim there is no easy way to debug an assembly program in a simulated processor.
-Digital offers a simple TCP-based remote control interface, so an [assembler IDE](https://github.com/hneemann/Assembler) 
-can be used to control the simulator and load assembly programs into the simulated processor, start the program, perform 
-single steps and so on. If a "single step" or a "run to next BRK instruction" is triggered by the assembly IDE, the
-actual used address of the program memory is returned to the assembler IDE. 
-This allows the assembler IDE to highlight the actual executed instruction. In this way it is very easy to debug an 
-assembly program executed by a simulated processor.
-
-### Circuit Synthesis ###
-
-Logisim is able to generate combinatorial circuits from a truth table and vice versa. In Digital, this is also possible.
-In addition, a sequential circuit can be generated from an appropriate state transition table.
-You can specify both the transition circuit and the output circuit. The minimization of the expressions is done
-by the method of Quine and McCluskey.
-The truth table also can derived from a circuit which contains simple combinatorial logic,
-D flip-flops or JK flip-flops, including the generation of the state transition table.
-Note, however, that a flip-flop build of combinatorial gates is not recognized as such.
-The analysis of sequential circuits only works with purely combinatorial
-logic combined with the build-in D or JK flip-flops.
-Once a truth table or state transition table has been created, a JEDEC file can be exported for a 
-[GAL16v8](http://www.atmel.com/devices/ATF16V8C.aspx) or a [GAL22v10](http://www.atmel.com/devices/ATF22V10C.aspx).
-After that, this file can be flashed onto a appropriate GAL.
-As mentioned above these GALs are quite old but with 8/10 macro-cells sufficient for beginners exercises.
-If more macro-cells are required, see the PDF documentation for details on how to set up Digital to support the 
-[ATF1502](http://www.microchip.com/wwwproducts/en/ATF1502AS) and
-[ATF1504](http://www.microchip.com/wwwproducts/en/ATF1504AS) CPLDs which offer 32/64 macro-cells and In System Programming.
-It is also possible to export a circuit to VHDL or Verilog to run it on an FPGA.
-But the necessary HDL synthesis is sometimes a bit time-consuming and in my experience slows down the workflow in a 
-lab exercise too much, especially if only simple circuits are required and the students change the circuit 
-over and over again.
-
-## How do I get set up? ##
-
-If you want to build Digital from the source code:
-
-* At first clone the repository.
-* A JDK (at least JDK 8) is required (either the Oracle JDK or OpenJDK)
-* maven is used as build system, so the easiest way is to install [maven](https://maven.apache.org/).
-* After that you can simply run `mvn install` to build Digital.
-* Run `mvn site` to create a findbugs and a JaCoCo code coverage report.
-* Most IDEs (Eclipse, NetBeans, IntelliJ) are able to import the `pom.xml` to create a project.
-
-## Contribution guidelines ##
-
-* If you want to contribute, please open a GitHub issue first.
-  * A discussion should avoid duplicate or unnecessary work.  
-  * Before you send a pull request, make sure that at least `mvn install` runs without errors.
-* Don't introduce new findbugs issues.
-* Try to keep the test coverage high. The target is a minimum of 80% test coverage.
-* So far, there are only a few GUI tests, so that the overall test coverage is only slightly below 80%. Try to keep the amount of untested GUI code low.
-
-## Credits ##
-
-Many thanks to the following persons for their help:
-
-* Ivan de Jesus Deras Tabora from the Universidad Tecnológica Centroamericana in Honduras has implemented the verilog code generator and almost all the necessary verilog templates.
-* Theldo Cruz Franqueira from the Pontifícia Universidade Católica de Minas Gerais in Brazil has provided the Portuguese translation.
-* Ángel Millán from the Instituto de Educación Secundaria Ies Virgen de Villadiego in Peñaflor (Sevilla), Spain has provided the Spanish translation.
-* XinJun Ma ([@itviewer](https://github.com/itviewer)) has provided the Chinese translation.
-* Nicolas Maltais ([@maltaisn](https://github.com/maltaisn)) has provided the French translation.
-* Luca Cavallari ([@psiwray](https://github.com/psiwray)) has provided the Italian translation.
-
-## Additional Screenshots
-
-![screnshot3](distribution/screenshot3.png)
+<div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><p dir="auto"><a href="https://github.com/hneemann/Digital/releases/latest/download/Digital.zip"><img src="/hneemann/Digital/raw/master/distribution/Download.svg" alt="下载" style="max-width: 100%;"></a></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/86b20738caba6e5125c57ca35ad9dfd69785b028a9d213669067b2061f203220/68747470733a2f2f7472617669732d63692e636f6d2f686e65656d616e6e2f4469676974616c2e7376673f6272616e63683d6d6173746572"><img src="https://camo.githubusercontent.com/86b20738caba6e5125c57ca35ad9dfd69785b028a9d213669067b2061f203220/68747470733a2f2f7472617669732d63692e636f6d2f686e65656d616e6e2f4469676974616c2e7376673f6272616e63683d6d6173746572" alt="构建状态" data-canonical-src="https://travis-ci.com/hneemann/Digital.svg?branch=master" style="max-width: 100%;"></a>
+<a href="https://codecov.io/gh/hneemann/Digital" rel="nofollow"><img src="https://camo.githubusercontent.com/8a3e035906f8af604832f422286b57318b0f4ffe7a9c6d3a9778abd829c05124/68747470733a2f2f636f6465636f762e696f2f67682f686e65656d616e6e2f4469676974616c2f6272616e63682f6d61737465722f67726170682f62616467652e737667" alt="代码科夫" data-canonical-src="https://codecov.io/gh/hneemann/Digital/branch/master/graph/badge.svg" style="max-width: 100%;"></a></p>
+<div class="markdown-heading" dir="auto"><h1 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">数字的</font></font></h1><a id="user-content-digital" class="anchor-element" aria-label="永久链接：数字" href="#digital"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Digital 是一款易于使用的数字逻辑设计器和电路模拟器，专为教育目的而设计。</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/hneemann/Digital/blob/master/distribution/screenshot.png"><img src="/hneemann/Digital/raw/master/distribution/screenshot.png" alt="截图" style="max-width: 100%;"></a></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/hneemann/Digital/blob/master/distribution/screenshot2.png"><img src="/hneemann/Digital/raw/master/distribution/screenshot2.png" alt="屏幕截图2" style="max-width: 100%;"></a></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><a href="https://github.com/hneemann/Digital/releases/latest/download/Digital.zip"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">与安装</font></font></h2><a id="user-content-download-and-installation" class="anchor-element" aria-label="永久链接：下载和安装" href="#download-and-installation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">无需安装，只需解压</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Digital.zip</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件即可</font></font><a href="https://github.com/hneemann/Digital/releases/latest/download/Digital.zip"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">在 Linux 上启动 shell 脚本，在 Windows 和 MacOS 上可以直接启动 JAR 文件。</font><font style="vertical-align: inherit;">运行 Digital 需要 Java 运行时环境（至少 JRE 8）。</font><font style="vertical-align: inherit;">在 Windows 上，获取 Java 的最简单方法是安装
+</font></font><a href="https://adoptium.net/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Eclipse Temurin</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">项目提供的二进制文件。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果在您的系统上启动 Digital 时出现任何问题，请尝试从Digital</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件夹中的命令行运行 Digital
+ </font><font style="vertical-align: inherit;">：</font></font></p>
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto"><pre class="notranslate"><code>java -jar Digital.jar
+</code></pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="java -jar Digital.jar" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">特征</font></font></h2><a id="user-content-features" class="anchor-element" aria-label="永久链接：特点" href="#features"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以下是数字化的主要特点：</font></font></p>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过测量图可视化信号状态。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用于分析振荡的单门模式。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">组合和时序电路的分析和综合。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简单的电路测试：您可以创建测试用例并执行它们来验证您的设计。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">许多示例：从传输门 D 触发器到完整（简单）的类似 MIPS 的单周期 CPU。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">包括有限状态机 (FSM) 的简单编辑器。</font><font style="vertical-align: inherit;">然后，FSM 可以转换为状态转换表和实现 FSM 的电路（参见</font></font><a href="#additional-screenshots"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">屏幕截图</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">包含最常用的 74xx 系列集成电路的库。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">支持通用电路。</font><font style="vertical-align: inherit;">这允许创建在使用时可以参数化的电路。</font><font style="vertical-align: inherit;">以这种方式，例如可以创建具有可选择位宽度的桶形移位器。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">良好的性能：示例处理器的时钟频率为 120 kHz。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">支持大型电路：“Conway's Game of Life”示例由大约 2400 个有源组件组成，并且运行良好。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可以使用用 Java 实现并打包在 jar 文件中的自定义组件。</font><font style="vertical-align: inherit;">有关详细信息，请参阅此</font></font><a href="https://github.com/hneemann/digitalCustomComponents"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">示例</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简单的远程</font></font><a href="https://github.com/hneemann/Assembler/blob/master/src/main/java/de/neemann/assembler/gui/RemoteInterface.java"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TCP 接口</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+，例如允许</font></font><a href="https://github.com/hneemann/Assembler"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">汇编器 IDE</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">控制模拟器。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可以使用 VHDL 或 Verilog 来描述组件。</font><font style="vertical-align: inherit;">模拟VHDL</font><font style="vertical-align: inherit;">
+定义的组件需要安装开源VHDL
+模拟器</font></font><a href="http://ghdl.free.fr/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ghdl</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ，模拟Verilog定义的组件需要安装开源Verilog模拟器</font></font><a href="http://iverilog.icarus.com/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Icarus Verilog 。</font></font></a><font style="vertical-align: inherit;"></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">电路可以导出为 VHDL 或 Verilog。</font><font style="vertical-align: inherit;">还直接支持
+</font></font><a href="https://reference.digilentinc.com/reference/programmable-logic/basys-3/start" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">BASYS3 板</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和
+</font></font><a href="https://tinyfpga.com/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TinyFPGA BX</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">板。</font><font style="vertical-align: inherit;">有关详细信息，请参阅文档。</font><font style="vertical-align: inherit;">示例文件夹包含示例 CPU 的变体，它在 BASYS3 板上运行。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">直接导出 JEDEC 文件，您可以将其闪存到</font></font><a href="https://www.microchip.com/wwwproducts/en/ATF16V8C" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GAL16v8</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+或</font></font><a href="https://www.microchip.com/wwwproducts/en/ATF22V10C" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GAL22v10</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">这些芯片有些过时（1985 年推出！），但对于初学者练习来说足够了，易于理解且有详细记录。</font><font style="vertical-align: inherit;">还
+支持</font></font><a href="https://www.microchip.com/design-centers/programmable-logic/spld-cpld/cpld-atf15xx-family" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ATF150x</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">芯片，该芯片提供多达 128 个宏单元和系统编程。</font><font style="vertical-align: inherit;">有关详细信息，</font><font style="vertical-align: inherit;">请参阅</font></font><a href="https://github.com/hneemann/Digital/releases/latest"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文档。</font></font></a><font style="vertical-align: inherit;"></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">电路的 SVG 导出，包括 LaTeX/Inkscape 兼容的 SVG 版本（请参阅
+</font></font><a href="https://www.ctan.org/tex-archive/info/svg-inkscape" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ctan</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">没有遗留代码。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">良好的测试覆盖率（大约 80%；GUI 测试和 HDL 模拟器集成测试都没有在 Travis-CI 构建服务器上运行，因此 CodeCov 测量的覆盖率仅为 50% 左右）。</font><font style="vertical-align: inherit;">几乎所有示例都包含确保它们正常工作的测试用例。</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"></font><a href="/hneemann/Digital/blob/master/distribution/ReleaseNotes.txt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发行说明</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中列出了尚未发布的最新更改
+</font><font style="vertical-align: inherit;">。</font></font><a href="https://infdigital.dhbw-mosbach.de/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以在此处</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">找到最新的预发布版本</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">在预发布版本中，通常不执行自动化 GUI 测试。</font><font style="vertical-align: inherit;">所有其他测试（包括 HDL 测试）均执行无误。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文档</font></font></h2><a id="user-content-documentation" class="anchor-element" aria-label="永久链接：文档" href="#documentation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该</font></font><a href="https://github.com/hneemann/Digital/releases/latest"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文档</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有英语、德语、西班牙语、葡萄牙语、法语、意大利语和简体中文版本。</font><font style="vertical-align: inherit;">它仍然很不完整，但其中包含“第一步”一章，解释了 Digital 的基本用法。</font><font style="vertical-align: inherit;">该文档还包含可用 74xx 芯片的列表和可用键盘快捷键的列表。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">翻译</font></font></h2><a id="user-content-translations" class="anchor-element" aria-label="永久链接：翻译" href="#translations"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">到目前为止，Digital 有英语、德语、西班牙语、葡萄牙语、法语、意大利语和简体中文版本。</font><font style="vertical-align: inherit;">如果有人想添加新的翻译，请告诉</font></font><a href="mailto:digital-simulator@web.de"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">我可以为您提供一个特殊的翻译文件。</font><font style="vertical-align: inherit;">
+该文件比Digital 直接使用的</font></font><a href="https://github.com/hneemann/Digital/blob/master/src/main/resources/lang"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">更容易翻译。</font><font style="vertical-align: inherit;">因此您不必处理 GitHub 或 Java 源代码。</font><font style="vertical-align: inherit;">只需将英文文本的相应翻译添加到此文件中并将其发回给</font></font><a href="mailto:digital-simulator@web.de"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">即可。</font><font style="vertical-align: inherit;">如果您想了解如何自己创建必要的文件，请参阅
+</font></font><a href="https://github.com/hneemann/Digital/blob/master/src/main/resources/lang/howTo.md"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此处</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评论</font></font></h2><a id="user-content-comments" class="anchor-element" aria-label="永久链接：评论" href="#comments"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想发送错误报告或功能请求，请使用 GitHub
+</font></font><a href="https://github.com/hneemann/Digital/issues/new"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题跟踪器</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">这有助于我提高数字化水平，所以不要犹豫。</font><font style="vertical-align: inherit;">如果您有一般性问题，您还可以使用新的 GitHub</font></font><a href="https://github.com/hneemann/Digital/discussions"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">讨论</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+来提出问题，而无需创建问题。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">也可以发送私人消息至</font></font><a href="mailto:digital-simulator@web.de"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">digital-simulator@web.de</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">动机</font></font></h2><a id="user-content-motivation" class="anchor-element" aria-label="永久链接：动机" href="#motivation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在开发 Digital 之前，我使用了</font><font style="vertical-align: inherit;">Carl Burch 开发的</font></font><a href="http://www.cburch.com/logisim/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Logisim 。</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您熟悉 Logisim，您就会认出电线颜色方案。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Logisim 是一款出色且经过验证的教学工具，一直到 2011 年才得到积极开发。2013 年 Carl Burch 开始开发一款名为</font></font><a href="http://www.toves.org/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Toves</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的新模拟器。</font><font style="vertical-align: inherit;">在他的</font></font><a href="http://www.toves.org/blog/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中，他解释了为什么他决定开发一个新的模拟器而不是改进 Logisim。</font><font style="vertical-align: inherit;">简而言之：在他看来，Logisim 的架构存在难以克服的弱点。</font><font style="vertical-align: inherit;">不幸的是，Toves 的开发很早就停止了。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2014年，Carl Burch最终</font></font><a href="http://www.cburch.com/logisim/retire-note.html" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">停止了</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Logisim的开发。</font><font style="vertical-align: inherit;">由于 Logisim 作为开源发布，有许多分支可以继续 Logisim 上的工作：</font></font></p>
+<ul dir="auto">
+<li><a href="https://github.com/logisim-evolution/logisim-evolution"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">瑞士多个学院（Haute École Spécialisée Bernoise、Haute École du paysage、d'ingénierie et d'architecture de Genève 和 Haute École d'Ingénierie et de Gestion du Canton de Vaud）的人们对</font><a href="https://github.com/logisim-evolution/logisim-evolution"><font style="vertical-align: inherit;">Logisim 的发展</font></a></font></li>
+<li><a href="https://github.com/lawrancej/logisim"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Logisim，</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：Joseph Lawrance，马萨诸塞州波士顿温特沃斯理工学院</font></font></li>
+<li><a href="https://code.google.com/archive/p/logisim-iitd/" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">印度理工学院德里分校的</font><a href="https://code.google.com/archive/p/logisim-iitd/" rel="nofollow"><font style="vertical-align: inherit;">Logisim-iitd</font></a></font></li>
+<li><a href="http://www.cs.cornell.edu/courses/cs3410/2015sp/" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">康奈尔大学CS3410课程的</font><a href="http://www.cs.cornell.edu/courses/cs3410/2015sp/" rel="nofollow"><font style="vertical-align: inherit;">Logisim</font></a></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">但据我所知，这些项目并没有致力于解决架构上的困难。</font><font style="vertical-align: inherit;">它们更多地是关于添加功能和修复错误。</font><font style="vertical-align: inherit;">例如，</font><font style="vertical-align: inherit;">在</font></font><a href="https://github.com/logisim-evolution/logisim-evolution"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Logisim-evolution中，添加了 VHDL/Verilog 导出和非常好的 FPGA 板集成。</font></font></a><font style="vertical-align: inherit;"></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所以我也决定完全从头开始实现一个新的模拟器，并于2016年3月开始实施Digital。同时已经达到了与Logisim相当的开发水平。</font><font style="vertical-align: inherit;">在某些领域（性能、电路测试、电路分析、硬件支持）Logisim 已经被超越。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下面我想简单解释一下促使我开始新的开发的原因：</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">打开</font></font></h3><a id="user-content-switch-on" class="anchor-element" aria-label="永久链接：打开" href="#switch-on"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 Logisim 中，没有真正的电路“接通”。</font><font style="vertical-align: inherit;">当您修改模拟时，模拟也在运行。</font><font style="vertical-align: inherit;">这有时会导致意外的行为。</font><font style="vertical-align: inherit;">因此可以构建一个工作正常的简单主从触发器。</font><font style="vertical-align: inherit;">但电路复位后，触发器不再工作。</font><font style="vertical-align: inherit;">由于电路未接通，因此在电路完成后没有稳定时间使电路达到稳定状态。</font><font style="vertical-align: inherit;">主从JK触发器只能通过复位输入来实现，并且需要激活该复位输入以使电路正常运行。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要了解 Digital 如何处理这个问题，您必须了解 Digital 中的模拟如何工作：Digital 使用基于事件的模拟器方法，即每次门的输入之一发生变化时，都会读取新的输入状态，然而，门的输出不会立即更新。</font><font style="vertical-align: inherit;">仅当所有涉及的门都读取了其输入时，所有门的输出才会更新。</font><font style="vertical-align: inherit;">所有门似乎都同步变化，即它们似乎具有完全相同的门延迟时间。</font><font style="vertical-align: inherit;">然而，这种方法的一个不良特征是，即使是简单的 RS 触发器也可能无法达到稳定状态。</font><font style="vertical-align: inherit;">Logisim 也有同样的问题。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为了解决这个问题，引入了“接通”，并在电路接通后的稳定时间内使用了不同的模拟模式：每次门在其输入之一发生变化时，都会读取所有门输入及其输出立即更新。</font><font style="vertical-align: inherit;">这种情况按随机顺序按门发生，直到不再发生任何变化并且电路达到稳定状态。</font><font style="vertical-align: inherit;">现在，门似乎有随机延迟时间。</font><font style="vertical-align: inherit;">这样，主从触发器在“接通”后达到稳定状态，但最终状态仍然是未定义的。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为了在定义的状态下启动电路，需要使用特殊的复位门。</font><font style="vertical-align: inherit;">该门具有单个输出，该输出在稳定时间内为低电平，并在稳定时间结束时变为高电平。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">这种方法的缺点是无法更改正在运行的模拟。</font><font style="vertical-align: inherit;">为此，需要关闭电路、修改并再次打开。</font><font style="vertical-align: inherit;">然而，这个过程也适用于实际电路。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">振荡</font></font></h3><a id="user-content-oscillations" class="anchor-element" aria-label="永久链接：振荡" href="#oscillations"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 Logisim 很难找到振荡电路的根本原因。</font><font style="vertical-align: inherit;">如果 Logisim 检测到振荡，则会发出相应的消息，但无法更详细地调查原因，因此很难了解发生了什么。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所有门的同步更新（其输入之一发生变化）也可能会导致数字振荡。</font><font style="vertical-align: inherit;">在这种情况下，会检测到振荡并停止模拟。</font><font style="vertical-align: inherit;">然而，还有一种单门模式，允许逐个门地传播信号变化。</font><font style="vertical-align: inherit;">此功能允许跟踪电路中的路径。</font><font style="vertical-align: inherit;">每一步之后，所有输入发生变化的门都会突出显示。</font><font style="vertical-align: inherit;">通过这种方式，您可以看到信号变化如何在电路中传播，从而找到振荡的根本原因。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">嵌入式电路</font></font></h3><a id="user-content-embedded-circuits" class="anchor-element" aria-label="永久链接：嵌入式电路" href="#embedded-circuits"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">与 Logisim 类似，Digital 还允许将以前保存的电路嵌入到新设计中，因此可以创建分层电路。</font><font style="vertical-align: inherit;">然而，数字嵌入式电路的使用频率与电路的使用频率相同。</font><font style="vertical-align: inherit;">这类似于 C 程序，其中所有函数调用都编译为内联函数。</font><font style="vertical-align: inherit;">这也类似于真实电路：每个子电路“物理上存在”的频率与设计中使用的频率相同。</font><font style="vertical-align: inherit;">虽然这种方法增加了内存中仿真模型的数据结构的大小，但它简化了仿真本身。</font><font style="vertical-align: inherit;">因此，例如，嵌入式电路的输入和输出没有被特别对待，它们在仿真模型形成之后就不再存在了。</font><font style="vertical-align: inherit;">即使是双向连接也可以轻松实现。</font><font style="vertical-align: inherit;">由于这种方法，例如子电路中的嵌入式与门的行为与在顶层插入的与门完全相同，尽管从仿真模型的角度来看，这两种变体之间实际上没有区别。</font><font style="vertical-align: inherit;">Logisim 的工作方式有些不同，这有时会导致意外的情况，例如意外的信号传播时间，并且使得使用双向引脚变得困难。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">表现</font></font></h3><a id="user-content-performance" class="anchor-element" aria-label="永久链接：性能" href="#performance"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果模拟完整的处理器，则可以在不更新图形表示的情况下计算模拟。</font><font style="vertical-align: inherit;">可以使用 120kHz 时钟（Intel® Core™ i5-3230M CPU @ 2.60GHz）模拟简单的处理器（参见示例），这也适用于更复杂的组装练习，例如康威的生命游戏。</font><font style="vertical-align: inherit;">有一个具有单个输入的断门。</font><font style="vertical-align: inherit;">如果该输入从低变为高，则快速运行将停止。</font><font style="vertical-align: inherit;">这样就可以实现一条汇编指令BRK，然后可以使用该指令在汇编语言程序中插入断点。</font><font style="vertical-align: inherit;">这样汇编程序的调试就变得非常简单。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">调试</font></font></h3><a id="user-content-debugging" class="anchor-element" aria-label="永久链接：调试" href="#debugging"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 Logisim 中，没有简单的方法可以在模拟处理器中调试汇编程序。</font><font style="vertical-align: inherit;">Digital提供了一个简单的基于TCP的远程控制接口，因此可以使用</font></font><a href="https://github.com/hneemann/Assembler"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">汇编IDE</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+来控制模拟器并将汇编程序加载到模拟处理器中、启动程序、执行单步等。</font><font style="vertical-align: inherit;">如果汇编IDE触发“单步”或“运行到下一个BRK指令”，则将程序存储器的实际使用地址返回给汇编IDE。</font><font style="vertical-align: inherit;">这允许汇编器 IDE 突出显示实际执行的指令。</font><font style="vertical-align: inherit;">通过这种方式，调试由模拟处理器执行的汇编程序是非常容易的。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">电路综合</font></font></h3><a id="user-content-circuit-synthesis" class="anchor-element" aria-label="永久链接：电路综合" href="#circuit-synthesis"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Logisim 能够从真值表生成组合电路，反之亦然。</font><font style="vertical-align: inherit;">在数字领域，这也是可能的。</font><font style="vertical-align: inherit;">另外，可以从适当的状态转换表生成时序电路。</font><font style="vertical-align: inherit;">您可以指定转换电路和输出电路。</font><font style="vertical-align: inherit;">表达式的最小化是通过Quine 和McCluskey 的方法完成的。</font><font style="vertical-align: inherit;">真值表还可以从包含简单组合逻辑、D触发器或JK触发器的电路中导出，包括状态转换表的生成。</font><font style="vertical-align: inherit;">但请注意，组合门的触发器构建不被这样识别。</font><font style="vertical-align: inherit;">时序电路的分析仅适用于与内置 D 或 JK 触发器相结合的纯组合逻辑。</font><font style="vertical-align: inherit;">创建真值表或状态转换表后，可以为
+</font></font><a href="http://www.atmel.com/devices/ATF16V8C.aspx" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GAL16v8</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或</font></font><a href="http://www.atmel.com/devices/ATF22V10C.aspx" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GAL22v10</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">导出 JEDEC 文件。</font><font style="vertical-align: inherit;">之后，可以将该文件刷新到适当的 GAL 上。</font><font style="vertical-align: inherit;">如上所述，这些 GAL 相当旧，但具有 8/10 宏单元足以适合初学者练习。</font><font style="vertical-align: inherit;">如果需要更多宏单元，请参阅 PDF 文档，了解有关如何设置 Digital 以支持
+</font><font style="vertical-align: inherit;">提供 32/64 宏单元和系统内编程的</font></font><a href="http://www.microchip.com/wwwproducts/en/ATF1502AS" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ATF1502</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和
+</font></font><a href="http://www.microchip.com/wwwproducts/en/ATF1504AS" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ATF1504 CPLD 的详细信息。</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">还可以将电路导出为 VHDL 或 Verilog，以便在 FPGA 上运行。</font><font style="vertical-align: inherit;">但必要的 HDL 合成有时有点耗时，根据我的经验，这会大大减慢实验室练习的工作流程，特别是如果只需要简单的电路并且学生一遍又一遍地更改电路。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我该如何设置？</font></font></h2><a id="user-content-how-do-i-get-set-up" class="anchor-element" aria-label="永久链接：我该如何设置？" href="#how-do-i-get-set-up"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想从源代码构建 Digital：</font></font></p>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">首先克隆存储库。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">需要 JDK（至少 JDK 8）（Oracle JDK 或 OpenJDK）</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">maven 用作构建系统，因此最简单的方法是安装</font></font><a href="https://maven.apache.org/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">maven</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">之后，您可以简单地运行</font></font><code>mvn install</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">构建 Digital。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">运行</font></font><code>mvn site</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以创建 findbugs 和 JaCoCo 代码覆盖率报告。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">大多数 IDE（Eclipse、NetBeans、IntelliJ）都能够导入</font></font><code>pom.xml</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">来创建项目。</font></font></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">贡献指南</font></font></h2><a id="user-content-contribution-guidelines" class="anchor-element" aria-label="永久链接：贡献指南" href="#contribution-guidelines"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想贡献，请先打开 GitHub 问题。
+</font></font><ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">讨论应避免重复或不必要的工作。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在发送拉取请求之前，请确保至少</font></font><code>mvn install</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">运行时没有错误。</font></font></li>
+</ul>
+</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">不要引入新的 findbugs 问题。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">尽量保持高测试覆盖率。</font><font style="vertical-align: inherit;">目标是至少 80% 的测试覆盖率。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">到目前为止，只有少数 GUI 测试，因此总体测试覆盖率仅略低于 80%。</font><font style="vertical-align: inherit;">尽量减少未经测试的 GUI 代码的数量。</font></font></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">制作人员</font></font></h2><a id="user-content-credits" class="anchor-element" aria-label="永久链接：学分" href="#credits"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">非常感谢以下人士的帮助：</font></font></p>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">洪都拉斯中美洲科技大学的 Ivan de Jesus Deras Tabora 实现了 verilog 代码生成器和几乎所有必需的 verilog 模板。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">来自巴西米纳斯吉拉斯天主教大学的 Theldo Cruz Franqueira 提供了葡萄牙语翻译。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">来自西班牙佩尼亚弗洛尔（塞维利亚）的 Instituto de Educación Secundaria Ies Virgen de Villadiego 的 Ángel Millán 提供了西班牙语翻译。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">XinJun Ma ( </font></font><a href="https://github.com/itviewer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@itviewer</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) 提供了中文翻译。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nicolas Maltais ( </font></font><a href="https://github.com/maltaisn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@maltaisn</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) 提供了法语翻译。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Luca Cavallari ( </font></font><a href="https://github.com/psiwray"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@psiwray</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) 提供了意大利语翻译。</font></font></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附加屏幕截图</font></font></h2><a id="user-content-additional-screenshots" class="anchor-element" aria-label="永久链接：附加屏幕截图" href="#additional-screenshots"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/hneemann/Digital/blob/master/distribution/screenshot3.png"><img src="/hneemann/Digital/raw/master/distribution/screenshot3.png" alt="截图3" style="max-width: 100%;"></a></p>
+</article></div>
